@@ -1,0 +1,39 @@
+.loginBox {
+  text-align: center;
+  padding: 0 3rem;
+}
+
+.loginOptionWraper {
+  display: flex;
+  padding: 0 5rem;
+}
+
+.loginOption {
+  padding: 1.5rem;
+  box-sizing: border-box;
+  border: solid black 3px;
+  margin: $m-size;
+  text-align: center;
+  font-size: 2.5rem;
+  flex: 1;
+  // border: $wisteria 3px solid;
+  border: $wisteria 3px solid;  
+  background-color: lighten($color: $sunflower, $amount:45%);
+  border-radius: 5rem;
+  color: $wisteria; // lighten($color: $sunflower, $amount: 10%);
+  font-weight: bold;
+  transition: all .7s;
+}
+
+
+.loginOption:hover {
+  cursor: pointer;
+  border-color: $wisteria;
+  background-color: $wisteria;
+  color: lighten($color: $sunflower, $amount: 10%);
+}
+
+.loginOption:active {
+  background-color: pink;
+}
+

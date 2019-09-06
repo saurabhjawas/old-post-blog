@@ -1,0 +1,52 @@
+.emailAuthWrapper {
+  text-align: center;
+}
+
+.emailAuthWrapper h3{
+  margin-bottom: 0;
+}
+
+.loginform{
+  padding: 0 15rem;
+}
+
+.loginform input {
+  height: 5rem;
+  display: block;
+  width: 100%;
+  min-width: 20rem;
+  margin: 2rem 0 ;
+  text-align: center;
+  outline: none;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  box-shadow: inset 0px 1px 8px -3px #ABABAB;
+  font-size: 2rem;
+}
+
+.loginform .button {
+  height: 5rem;
+  width: 100%;
+  border: 3px solid lighten($color: $peter-river, $amount: 7%);
+  // border-radius: 2rem;
+  background-color: lighten($color: $peter-river, $amount: 10%);
+  font-size: 2rem;
+  color: lighten($color: $sunflower, $amount: 35%);
+  min-width: 20rem;
+  transition: all .7s;
+}
+
+.loginform .button:hover {
+  cursor: pointer;
+  background-color:  $peter-river;
+  border-color: darken($peter-river,5%);
+}
+
+
+.changeFormOption {
+  text-decoration: underline;
+}
+
+.changeFormOption:hover {
+  cursor: pointer;
+}

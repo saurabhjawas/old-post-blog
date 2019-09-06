@@ -1,0 +1,70 @@
+.header {
+  background-color: $wisteria;
+}
+
+.nav-container {
+  text-align: center;
+}
+
+.navlink {
+  box-sizing: border-box;
+  color: lighten($color: $sunflower, $amount: 10%);
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  width: 9rem;
+  text-align: center;
+  display: inline-block;
+  border-radius: 1.5rem;
+  border: solid 2px lighten($color: $sunflower, $amount: 10%);
+  background-color: darken($color: $wisteria, $amount: 10%);
+  margin-right: $m-size;
+  font-size: 1.45rem;
+  font-weight: normal;
+  margin-bottom: .7rem;
+}
+
+
+
+.navlink:hover, .active-navlink {
+  color: $clouds;
+  background-color: $peter-river;
+  border-color: $clouds;
+  font-weight: normal;
+}
+
+
+.header .header-text {
+  padding-top: .3rem;
+  margin-top: 0;
+  font-size: 4.5rem;
+  margin: 0;  
+  margin-bottom: .5rem;
+  text-align: center;
+}
+
+/*
+nav li {
+  float: left;
+  list-style: none;
+  margin-right: 5px;
+  border: solid 1px #ecf0f1;
+  box-sizing: border-box;
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  margin-bottom: 5px;
+  border-radius: 25px;
+  background-color: #b86833;
+}
+
+nav a {
+  text-decoration: none;
+  font-size: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #ecf0f1;
+  font-weight: bold;
+}
+
+*/

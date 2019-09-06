@@ -1,0 +1,54 @@
+
+// colors
+$amethyst:    #9c56b8;
+$peter-river: #2c97de;
+$pomengrate:  #c23824;
+$wisteria:    #8f3faf;
+$nephritis:   #1aaf5d;
+$wet-asphalt: #33495f;
+$pumpkin:     #d55400;
+$turqoise:    #00bd9c;
+$carrot:      #e87e04;
+$alizarin:    #e94b35;
+$sunflower:   #f2c500;
+$orange:      #f59d00;
+$green-sea:   #00a185;
+$belize-hole: #227fbb;
+$clouds:      #ecf0f1;
+$silver:      #bdc3c7;
+$concrete:    #95a5a6;
+$asbestos:    #7f8c8d;
+
+// fonts
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Nunito:300,400,400i,700|Oswald:300,400&display=swap');
+
+$header-font-family: Oswald, Arial, sans-serif;
+$font-family: Nunito, Arial, sans-serif;
+$title-font-family: Montserrat, Arial, sans-serif;
+
+// spacing
+$s-size: 1.2rem;
+$m-size: 1.6rem;
+$l-size: 3.2rem;
+$xl-size: 4.8rem;
+
+//Breakpoint
+$sm-min-width: 30em;
+$md-min-width: 45em;
+$lg-min-width: 64em;
+
+//outline
+$outline-color: #000;
+$thickness: 1.5px;
+$outline: // -2px -2px 0 $outline-color, 2px -2px 0 $outline-color, -2px 2px 0 $outline-color, 2px 2px 0 $outline-color;
+-1*$thickness -1*$thickness 0 #000,
+		$thickness -1*$thickness 0 #000,
+		-1*$thickness $thickness 0 #000,
+		$thickness $thickness 0 #000;
+
+.header-text {
+			font-family: $header-font-family;
+			font-weight: bold;
+			color: $sunflower;
+			text-shadow: $outline;
+}

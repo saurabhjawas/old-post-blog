@@ -1,0 +1,35 @@
+.postWraper {
+  padding: 0 8rem;
+}
+
+.postEditor {
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  cursor: text;
+  padding: 1rem;
+  border-radius: 2px;
+  margin-bottom: 1rem;
+  box-shadow: inset 0px 1px 8px -3px #ABABAB;
+  background: #fefefe;
+}
+
+.postEditor .DraftEditor-root {
+  margin-top: 2rem;
+  min-height: 20rem;
+  max-height: 55rem;
+  overflow: auto;
+  margin-top: .3rem;
+}
+
+.postTitleInput {
+  height: 5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  text-align: center;
+  outline: none;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  box-shadow: inset 0px 1px 8px -3px #ABABAB;
+  margin-top: 1rem;
+}
+
