@@ -24,24 +24,6 @@
   font-size: 2rem;
 }
 
-.loginform .button {
-  height: 5rem;
-  width: 100%;
-  border: 3px solid lighten($color: $peter-river, $amount: 7%);
-  // border-radius: 2rem;
-  background-color: lighten($color: $peter-river, $amount: 10%);
-  font-size: 2rem;
-  color: lighten($color: $sunflower, $amount: 35%);
-  min-width: 20rem;
-  transition: all .7s;
-}
-
-.loginform .button:hover {
-  cursor: pointer;
-  background-color:  $peter-river;
-  border-color: darken($peter-river,5%);
-}
-
 
 .changeFormOption {
   text-decoration: underline;

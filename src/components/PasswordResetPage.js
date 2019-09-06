@@ -25,7 +25,7 @@ const PasswordResetPage = ({ resetPassword }) => {
             placeholder="enter your email id here"
             onChange={handleEmailChange}
           />
-          <button className="button">
+          <button className="submitButton">
             Send Password reset link
           </button>
         </form>

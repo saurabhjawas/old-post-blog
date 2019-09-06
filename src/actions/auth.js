@@ -1,6 +1,5 @@
 import * as actionTypes from './actionTypes'
 
-
 // import { firebase, googleAuthProvider } from '../firebase/firebase'
 
 export const login = (user) => ({
@@ -44,4 +43,8 @@ export const signUpWithEmail = (email, password) => ({
 export const resetPassword = (email) => ({
   type: actionTypes.RESET_PASSWORD,
   email
+})
+
+export const verifyEmail = () => ({
+  type: actionTypes.VERIFY_EMAIL
 })

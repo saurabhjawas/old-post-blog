@@ -72,10 +72,31 @@ function* resetPasswordAsync({ email }) {
         pathname: '/notification',
         state: {
           displayMessage: 'A link to reset password has been sent to your email id. Please check your email.'
-        }
+        } 
       })
     })
     .catch((error) => {
+      history.push({
+        pathname: './notification',
+        state: {
+          displayMessage: `${error.code}: ${error.message}`
+        }
+      })
+    })
+}
+
+function* verifyEmailAsync() {
+  yield firebase.auth().currentUser.sendEmailVerification().then(() => {
+      console.log('*** verification email sent ****');      
+      firebase.auth().signOut()
+    }).then(() => {
+      history.push({
+        pathname: './notification',
+        state: {
+          displayMessage: 'We just sent you an email for you to check and to verify your email id.'
+        }
+      })
+    }).catch((error) => {
       history.push({
         pathname: './notification',
         state: {
@@ -108,8 +129,12 @@ function* watchResetPassword() {
   yield takeLatest(actionTypes.RESET_PASSWORD, resetPasswordAsync)
 }
 
+function* watchVerifyEmail() {
+  yield takeLatest(actionTypes.VERIFY_EMAIL, verifyEmailAsync)
+}
+
 export { 
   watchLoginWithGoogle, watchLogoutOfProfile,
   watchLoginWithEmail, watchSignUpwithEmail,
-  watchResetPassword
+  watchResetPassword, watchVerifyEmail
 }

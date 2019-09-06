@@ -7,7 +7,7 @@ import configureStore from './store/configureStore'
 
 //firebase
 import { firebase } from './firebase/firebase'
-import { login, logout } from './actions/auth'
+import { login, logout, verifyEmail } from './actions/auth'
 
 // STYLES
 import 'normalize.css/normalize.css';
@@ -44,9 +44,18 @@ const renderApp = () => {
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
-    store.dispatch(login(user))
+
+    if (user.emailVerified) {
+      console.log('email is VERIFIED!!!')
+      store.dispatch(login(user))
+      
+    } else {
+      console.log('email is NOT VERIFIED!!!')
+      store.dispatch(verifyEmail(user))
+    }
+    
+   
     // history.push('/dashboard')
-    console.log(user)
   } else {
     store.dispatch(logout())
     // history.push('/login')

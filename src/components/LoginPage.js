@@ -6,6 +6,15 @@ import { history } from '../routers/AppRouter'
 // import EmailAuthForm from '../components/EmailAuthForm'
 
 const LoginPage = ({ loginWithGoogle }) => {
+
+  const handleEmailLogin = (e) => {
+    history.push({
+      pathname: '/loginemail'
+    }) 
+  }
+
+
+
   return (
     <div className="container">
       <div className="loginBox">
@@ -13,15 +22,8 @@ const LoginPage = ({ loginWithGoogle }) => {
         <div className="loginOptionWraper">
           <span className="loginOption" onClick={loginWithGoogle}>Login with Google</span>
           <span className="loginOption"
-           onClick={(e) => {
-            history.push({
-              pathname: '/loginemail'
-            }) 
-          }}
-          >Login with Email</span>
+           onClick={handleEmailLogin}>Login with Email</span>
         </div>
-        
-      {/* <EmailAuthForm isForSignUp={false} /> */}
         
       </div>
     </div>

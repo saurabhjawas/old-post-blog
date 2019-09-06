@@ -8,7 +8,8 @@ function* rootSaga() {
     authSagas.watchLogoutOfProfile(),
     authSagas.watchLoginWithEmail(),
     authSagas.watchSignUpwithEmail(),
-    authSagas.watchResetPassword()
+    authSagas.watchResetPassword(),
+    authSagas.watchVerifyEmail()
   ])
 }
 

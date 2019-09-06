@@ -67,7 +67,7 @@ const EmailAuthPage = ({ signUpWithEmail, loginWithEmail}) => {
             onChange={handlePasswordChange}
           />
           
-        <button className="button">
+        <button className="submitButton">
           {isForSignUp ? 'Sign Up' : 'Login'}
         </button>
         </form>
@@ -81,11 +81,7 @@ const EmailAuthPage = ({ signUpWithEmail, loginWithEmail}) => {
             </h4>
           )
         }
-        
-
       </div>
-
-
     </div>
   )  
 }

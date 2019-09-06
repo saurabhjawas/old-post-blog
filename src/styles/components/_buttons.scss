@@ -1,0 +1,36 @@
+.submitButton {
+  height: 5rem;
+  width: 100%;
+  border: 3px solid lighten($color: $peter-river, $amount: 7%);
+  // border-radius: 2rem;
+  background-color: lighten($color: $peter-river, $amount: 10%);
+  font-size: 2rem;
+  color: lighten($color: $sunflower, $amount: 35%);
+  min-width: 20rem;
+  transition: all .7s;
+}
+
+.submitButton:hover {
+  cursor: pointer;
+  background-color:  $peter-river;
+  border-color: darken($peter-river,5%);
+}
+
+.featureButton {
+  background-color: darken($turqoise,5%);
+  font-size: 2rem;
+  color: $clouds;
+  height: 5rem;
+  width: 40%;
+  margin-top: 2rem;
+  min-width: 15rem;
+  border: 3px solid darken($turqoise,5%);
+  transition: all .7s;
+  // text-decoration: underline;
+}
+
+.featureButton:hover {
+  cursor: pointer;
+  background-color: darken($turqoise,10%);
+  border-color: darken($turqoise,10%);
+}
