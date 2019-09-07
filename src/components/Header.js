@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom';
-import { logoutOfProfile, loginWithGoogle } from '../actions/auth'
-// LoginPage
-const Header = ({ isAuthenticated, logoutOfProfile, loginWithGoogle }) => (
+import { logoutOfProfile } from '../actions/auth'
+
+const Header = ({ isAuthenticated, logoutOfProfile }) => (
   <header className="header">
     <div className="container">
 
@@ -19,21 +19,25 @@ const Header = ({ isAuthenticated, logoutOfProfile, loginWithGoogle }) => (
           Dashboard
         </NavLink>
 
-        {isAuthenticated && (<NavLink
-          className="navlink"
-          to="/profile"
-          activeClassName="active-navlink"
-        >
-            Profile
-        </NavLink>)}
+        {
+          isAuthenticated && (<NavLink
+            className="navlink"
+            to="/profile"
+            activeClassName="active-navlink"
+          >
+              Profile
+          </NavLink>)
+        }
 
-        {isAuthenticated && (<NavLink
-          className="navlink"
-          to="/newpost"
-          activeClassName="active-navlink"
-        >
-          New Post
-        </NavLink>)}
+        {
+          isAuthenticated && (<NavLink
+            className="navlink"
+            to="/newpost"
+            activeClassName="active-navlink"
+          >
+            New Post
+          </NavLink>)
+        }
 
         <NavLink
           className="navlink"
@@ -43,26 +47,30 @@ const Header = ({ isAuthenticated, logoutOfProfile, loginWithGoogle }) => (
           Contact Us
           </NavLink>
 
-          {isAuthenticated && (<NavLink
-          className="navlink"
-          to="/mywork"
-          activeClassName="active-navlink"
-        >
-          My Work
-        </NavLink>)}
+        {
+          isAuthenticated && (<NavLink
+            className="navlink"
+            to="/mywork"
+            activeClassName="active-navlink"
+          >
+            My Work
+          </NavLink>)
+        }
 
-        {isAuthenticated ? (<button
-          className="button button-logout"
-          onClick={logoutOfProfile}
-        >
-          Sign out
-        </button>) : (<NavLink
-          className="navlink"
-          to="/login"
-          activeClassName="active-navlink"
-        >
-          Login
-        </NavLink>)}
+        {
+          isAuthenticated ? (<button
+            className="button button-logout"
+            onClick={logoutOfProfile}
+          >
+            Sign out
+          </button>) : (<NavLink
+            className="navlink"
+            to="/login"
+            activeClassName="active-navlink"
+          >
+            Login
+          </NavLink>)
+        }
 
       </div>
 
@@ -70,18 +78,10 @@ const Header = ({ isAuthenticated, logoutOfProfile, loginWithGoogle }) => (
   </header>
 )
 
-
 const mapDispathToProps = (dispatch) => ({
   logoutOfProfile: () => {
     dispatch(logoutOfProfile())
-  },
-  loginWithGoogle: () => {
-    dispatch(loginWithGoogle())
   }
 })
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: !!state.auth.userData
-})
-
-export default connect(mapStateToProps, mapDispathToProps)(Header)
+export default connect(undefined, mapDispathToProps)(Header)

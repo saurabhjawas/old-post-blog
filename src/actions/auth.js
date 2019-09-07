@@ -2,8 +2,14 @@ import * as actionTypes from './actionTypes'
 
 // import { firebase, googleAuthProvider } from '../firebase/firebase'
 
-export const login = (user) => ({
+export const login = ({ uid, displayName, photoURL, email, emailVerified }) => ({
     type: actionTypes.LOGIN,
+    uid,
+    displayName,
+    photoURL,
+    email,
+    emailVerified
+    /*
     firebaseUid: user.uid,
     userData: { 
       displayName: user.displayName, 
@@ -13,7 +19,8 @@ export const login = (user) => ({
         uid: user.providerData[0].uid,
         providerId:user.providerData[0].providerId
       }
-    }
+    } 
+    */
 })
 
 export const logout = () => ({

@@ -28,11 +28,11 @@ const AppRouter = () => (
       <PublicRoute path="/dashboard" isRestricted={false} component={DashboardPage} />
       <PublicRoute path="/contactus" isRestricted={false} component={ContactUsPage} />
       <PublicRoute path="/resetpassword" isRestricted={false} component={PasswordResetPage} />
-      
+      <PublicRoute path="/notification" component={CustomMessage} />
+
       <PrivateRoute path="/profile" component={ProfilePage} />
       <PrivateRoute path="/mywork" component={MyWorkPage} />
       <PrivateRoute path="/newPost" component={NewPostPage} />
-      <PublicRoute path="/notification" component={CustomMessage} />
 
       <PublicRoute isRestricted={false} component={NotFoundPage} />
 

@@ -23,7 +23,6 @@ import LoadingPage from './components/LoadingPage'
 import * as serviceWorker from './serviceWorker';
 // DO NOT TOUCH THE CODE ABOVE
 
-
 ReactDOM.render(<LoadingPage />, document.getElementById('root'));
 
 const store = configureStore()
@@ -45,24 +44,24 @@ const renderApp = () => {
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
 
+    // console.log(user)
     if (user.emailVerified) {
-      console.log('email is VERIFIED!!!')
+
+      // console.log('email is VERIFIED!!!')
       store.dispatch(login(user))
-      
+      // history.push('/dashboard')
+
     } else {
       console.log('email is NOT VERIFIED!!!')
       store.dispatch(verifyEmail(user))
-    }
+    }   
     
-   
-    // history.push('/dashboard')
   } else {
     store.dispatch(logout())
     // history.push('/login')
   }
   renderApp()
 })
-
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

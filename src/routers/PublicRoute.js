@@ -23,7 +23,7 @@ const PublicRoute = ({
 
       return (
         <div>
-          <Header />
+          <Header isAuthenticated={isAuthenticated} />
           <Component {...props} />
         </div>
       )
@@ -37,7 +37,7 @@ const PublicRoute = ({
 }
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: !!state.auth.userData
+  isAuthenticated: !!state.auth.uid
 })
 
 export default connect(mapStateToProps, undefined)(PublicRoute)

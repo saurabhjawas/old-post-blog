@@ -13,9 +13,9 @@ const ProfilePage = ({ displayName, photoURL, email }) => {
 }
 
 const mapStateToProps = (state) => ({
-  displayName: state.auth.userData.displayName,
-  photoURL:state.auth.userData.photoURL,
-  email: state.auth.userData.email
+  displayName: state.auth.displayName,
+  photoURL:state.auth.photoURL,
+  email: state.auth.email
 })
 
 export default connect(mapStateToProps, undefined)(ProfilePage)

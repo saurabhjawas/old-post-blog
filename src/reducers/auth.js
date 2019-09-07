@@ -2,8 +2,11 @@ const authReducer = (state = {}, action) => {
   switch(action.type) {
     case 'LOGIN':
         return {
-          firebaseUid: action.firebaseUid,
-          userData: action.userData
+          uid: action.uid,
+          displayName: action.displayName,
+          photoURL: action.photoURL,
+          email: action.email,
+          emailVerified: action.emailVerified
         }
     case 'LOGOUT':
           return {}
