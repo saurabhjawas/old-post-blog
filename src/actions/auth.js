@@ -9,18 +9,6 @@ export const login = ({ uid, displayName, photoURL, email, emailVerified }) => (
     photoURL,
     email,
     emailVerified
-    /*
-    firebaseUid: user.uid,
-    userData: { 
-      displayName: user.displayName, 
-      photoURL: user.photoURL, 
-      email: user.email ,
-      providerData: {
-        uid: user.providerData[0].uid,
-        providerId:user.providerData[0].providerId
-      }
-    } 
-    */
 })
 
 export const logout = () => ({
