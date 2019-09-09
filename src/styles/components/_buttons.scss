@@ -16,21 +16,25 @@
   border-color: darken($peter-river,5%);
 }
 
-.featureButton {
-  background-color: darken($turqoise,5%);
-  font-size: 2rem;
-  color: $clouds;
-  height: 5rem;
-  width: 40%;
+.postButtonWrapper {
+  display: flex;
   margin-top: 2rem;
-  min-width: 15rem;
-  border: 3px solid darken($turqoise,5%);
-  transition: all .7s;
-  // text-decoration: underline;
 }
 
-.featureButton:hover {
+.postButton {
+  flex: 1;
+  background-color: $concrete;
+  font-size: 2rem;
+  color: $clouds;
+  height: 4rem;
+  min-width: 12rem;
+  border: 3px solid $concrete;
+  transition: all .7s;
+  margin: 0 7rem;
+}
+
+.postButton:hover {
   cursor: pointer;
   background-color: darken($turqoise,10%);
-  border-color: darken($turqoise,10%);
+  border-color: darken($turqoise, 12%);
 }

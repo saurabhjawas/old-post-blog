@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { convertToRaw } from 'draft-js'
 import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
 
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
 import createLinkPlugin from 'draft-js-anchor-plugin';
+
 
 import { 
   ItalicButton,
@@ -13,6 +15,11 @@ import {
 
 import 'draft-js-inline-toolbar-plugin/lib/plugin.css';
 
+// import actions
+import { saveDraft } from '../actions/post'
+// redux
+import { connect } from 'react-redux'
+
 const linkPlugin = createLinkPlugin();
 const inlineToolbarPlugin = createInlineToolbarPlugin();
 const { InlineToolbar } = inlineToolbarPlugin;
@@ -21,7 +28,7 @@ const plugins = [
   inlineToolbarPlugin, linkPlugin
 ];
 
-export default class PostEditor extends Component {
+class PostEditor extends Component {
   state = {
     postTitle: '',
     editorState: createEditorStateWithText(''),
@@ -42,9 +49,30 @@ export default class PostEditor extends Component {
     this.setState({postTitle}) 
   }
 
+  handleSaveDraft = (e) => {
+    const contentState = this.state.editorState.getCurrentContent()
+    const draftContent = convertToRaw(contentState)
+    const draft = {
+      title: this.state.postTitle,
+      body: draftContent
+    }
+    this.props.saveDraft(draft)
+  }
+
   render() {
     return (
       <div>
+        <div className="postButtonWrapper">
+          <button className="postButton"
+            onClick={this.handleSaveDraft}
+          >
+            Save draft
+          </button>
+
+          <button className="postButton">
+            Publish
+          </button>
+        </div>
         <input className="postTitleInput" 
           type="text"
           value={this.state.postTitle}
@@ -80,3 +108,11 @@ export default class PostEditor extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  saveDraft: (draft) => {
+    dispatch(saveDraft(draft))
+  }
+})
+
+export default connect(undefined, mapDispatchToProps)(PostEditor)

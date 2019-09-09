@@ -1,7 +1,8 @@
 import {  all } from 'redux-saga/effects'
 
 import * as authSagas from './auth'
-import * as dbSagas from './database'
+import * as userSagas from './user'
+import * as postSagas from './post'
 
 function* rootSaga() {
   yield all([
@@ -14,7 +15,10 @@ function* rootSaga() {
     authSagas.watchVerifyEmail(),
 
     //databse sagas
-    dbSagas.watchLogin(),
+    userSagas.watchLogin(),
+
+    // post sagas
+    postSagas.watchSaveDraft()
   ])
 }
 
