@@ -1,18 +1,30 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
-import { convertToRaw } from 'draft-js'
+import { EditorState, convertToRaw , convertFromRaw } from 'draft-js'
 import  { createEditorStateWithText } from 'draft-js-plugins-editor';
+
+import moment from 'moment'
 
 import { saveDraft } from '../actions/post'
 
 import PostEditor from './PostEditor'
 
-const NewPostPage = (props) => {
-  
-  const [ postTitle, setPostTitle] = useState('')
+const EditPostPage = (props) => {
 
-  const [postEditorState, setPostEditorState ] = useState(createEditorStateWithText(''))
+  const postId = props.draftData ? props.draftData.postId : undefined
+
+  const initialTitle =  props.draftData ? props.draftData.title : ''
+
+  const initialEditorState = props.draftData ? (
+    EditorState.createWithContent(convertFromRaw(props.draftData))
+  ) : (
+    createEditorStateWithText('')
+  )
+  
+  const [ postTitle, setPostTitle] = useState(initialTitle)
+
+  const [postEditorState, setPostEditorState ] = useState(initialEditorState)
 
   const handlePostTitleChange = (e) => {
     setPostTitle(e.target.value) 
@@ -20,12 +32,16 @@ const NewPostPage = (props) => {
 
   const handleSaveDraft = (e) => {
     const contentState = postEditorState.getCurrentContent()
-    const draftContent = convertToRaw(contentState)
+
+    const rawContent = convertToRaw(contentState)
     const draft = {
       title: postTitle,
-      body: draftContent
+      body: rawContent,
+      savedAt: moment().valueOf()
     }
-    props.saveDraft(draft)
+    
+
+    props.saveDraft(props.uid, draft, postId)
   }
 
   return (
@@ -59,10 +75,14 @@ const NewPostPage = (props) => {
   )
 }
 
+const mapStateToProps = (state) => ({
+  uid:  state.auth.uid
+})
+
 const mapDispatchToProps = (dispatch) => ({
-  saveDraft: (draft) => {
-    dispatch(saveDraft(draft))
+  saveDraft: (uid, draft, postId) => {
+    dispatch(saveDraft(uid, draft, postId))
   }
 })
 
-export default connect(undefined, mapDispatchToProps)(NewPostPage)
+export default connect(mapStateToProps, mapDispatchToProps)(EditPostPage)

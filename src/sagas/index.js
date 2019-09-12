@@ -18,7 +18,8 @@ function* rootSaga() {
     userSagas.watchLogin(),
 
     // post sagas
-    postSagas.watchSaveDraft()
+    postSagas.watchSaveDraft(),
+    postSagas.watchStartSetUserPosts()
   ])
 }
 

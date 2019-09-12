@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga'
 
 // reducers
 import authReducer from '../reducers/auth'
+import postReducer from '../reducers/post'
 
 // saga
 import rootSaga from '../sagas'
@@ -15,8 +16,9 @@ const configureStore = () => {
 
   const store = createStore(
     combineReducers({
-      auth: authReducer
-    }) ,composeEnhancers(applyMiddleware(sagaMiddleware))
+      auth: authReducer,
+      userPosts: postReducer
+    }) , composeEnhancers(applyMiddleware(sagaMiddleware))
   )
   
   sagaMiddleware.run(rootSaga)

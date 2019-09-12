@@ -74,8 +74,7 @@ function* resetPasswordAsync({ email }) {
           displayMessage: 'A link to reset password has been sent to your email id. Please check your email.'
         } 
       })
-    })
-    .catch((error) => {
+    }).catch((error) => {
       history.push({
         pathname: './notification',
         state: {

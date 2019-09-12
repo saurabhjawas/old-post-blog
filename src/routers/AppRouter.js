@@ -6,7 +6,7 @@ import LoginPage from '../components/LoginPage'
 import DashboardPage from '../components/DashboardPage'
 import ContactUsPage from '../components/ContactUsPage'
 import ProfilePage from '../components/ProfilePage'
-import NewPostPage from '../components/NewPostPage'
+import EditPostPage from '../components/EditPostPage'
 import MyWorkPage from '../components/MyWorkPage'
 import NotFoundPage from '../components/NotFoundPage'
 import EmailAuthPage from '../components/EmailAuthPage'
@@ -32,7 +32,7 @@ const AppRouter = () => (
 
       <PrivateRoute path="/profile" component={ProfilePage} />
       <PrivateRoute path="/mywork" component={MyWorkPage} />
-      <PrivateRoute path="/newPost" component={NewPostPage} />
+      <PrivateRoute path="/newPost" component={EditPostPage} />
 
       <PublicRoute isRestricted={false} component={NotFoundPage} />
 

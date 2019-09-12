@@ -12,3 +12,5 @@ export const VERIFY_EMAIL = 'VERIFY_EMAIL'
 
 // post
 export const SAVE_DRAFT = 'SAVE_DRAFT'
+export const START_SET_USER_POSTS = 'START_SET_USER_POSTS'
+export const SET_USER_POSTS = 'SET_USER_POSTS'

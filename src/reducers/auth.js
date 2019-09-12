@@ -1,6 +1,8 @@
+import * as actionTypes from '../actions/actionTypes'
+
 const authReducer = (state = {}, action) => {
   switch(action.type) {
-    case 'LOGIN':
+    case actionTypes.LOGIN:
         return {
           uid: action.uid,
           displayName: action.displayName,

@@ -30,33 +30,38 @@ class PostEditor extends Component {
     this.editor.focus();
   };
   
+  handleEditorChange = (editorState) => {
+    this.props.setPostEditorState(editorState)
+  }
+
   render() {
     return (
-      <div className="postEditor" onClick={this.focus}>
-        <Editor
-          editorState={this.props.postEditorState}
-          onChange={this.props.setPostEditorState}
-          plugins={plugins}
-          ref={(element) => { this.editor = element }}
-          placeholder="Please enter content of post. You can use inline toobar (it appears when you highlight text).."
-        />
-        <InlineToolbar>
-        {
-          // may be use React.Fragment instead of div to improve perfomance after React 16
-          (externalProps) => (
-            <div>
-              <BoldButton {...externalProps} />
-              <ItalicButton {...externalProps} />
-              <UnderlineButton {...externalProps} />
-              <linkPlugin.LinkButton {...externalProps} />
-              <CodeBlockButton {...externalProps} />
-              <HeadlineTwoButton {...externalProps} />
-              <HeadlineThreeButton {...externalProps} />
-            </div>
-          )
-        }
+
+        <div className="postEditor" onClick={this.focus}>
+          <Editor
+            editorState={this.props.postEditorState}
+            onChange={this.handleEditorChange}
+            plugins={plugins}
+            ref={(element) => { this.editor = element }}
+            placeholder="Please enter content of post. You can use inline toobar (it appears when you highlight text).."
+          />
+          <InlineToolbar>
+          {
+            // may be use React.Fragment instead of div to improve perfomance after React 16
+            (externalProps) => (
+              <div>
+                <BoldButton {...externalProps} />
+                <ItalicButton {...externalProps} />
+                <UnderlineButton {...externalProps} />
+                <linkPlugin.LinkButton {...externalProps} />
+                <CodeBlockButton {...externalProps} />
+                <HeadlineTwoButton {...externalProps} />
+                <HeadlineThreeButton {...externalProps} />
+              </div>
+            )
+          }
         </InlineToolbar>
-      </div>
+        </div>
     )
   }
 }

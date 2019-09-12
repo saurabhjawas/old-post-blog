@@ -7,7 +7,10 @@ import configureStore from './store/configureStore'
 
 //firebase
 import { firebase } from './firebase/firebase'
+
+//actions
 import { login, logout, verifyEmail } from './actions/auth'
+import { startSetUserPosts } from './actions/post'
 
 // STYLES
 import 'normalize.css/normalize.css';
@@ -51,6 +54,7 @@ firebase.auth().onAuthStateChanged((user) => {
       store.dispatch(login(user))
       // history.push('/dashboard')
 
+      store.dispatch(startSetUserPosts(user.uid))
     } else {
       console.log('email is NOT VERIFIED!!!')
       store.dispatch(verifyEmail(user))
