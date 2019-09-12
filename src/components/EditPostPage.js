@@ -6,18 +6,18 @@ import  { createEditorStateWithText } from 'draft-js-plugins-editor';
 
 import moment from 'moment'
 
-import { saveDraft } from '../actions/post'
+import { saveDraft, publish } from '../actions/post'
 
 import PostEditor from './PostEditor'
 
-const EditPostPage = (props) => {
+const EditPostPage = ({ draftData, uid, saveDraft, publish }) => {
 
-  const postId = props.draftData ? props.draftData.postId : undefined
+  const postId = draftData ? draftData.postId : undefined
 
-  const initialTitle =  props.draftData ? props.draftData.title : ''
+  const initialTitle =  draftData ? draftData.title : ''
 
-  const initialEditorState = props.draftData ? (
-    EditorState.createWithContent(convertFromRaw(props.draftData))
+  const initialEditorState = draftData ? (
+    EditorState.createWithContent(convertFromRaw(draftData.body))
   ) : (
     createEditorStateWithText('')
   )
@@ -32,16 +32,25 @@ const EditPostPage = (props) => {
 
   const handleSaveDraft = (e) => {
     const contentState = postEditorState.getCurrentContent()
-
     const rawContent = convertToRaw(contentState)
     const draft = {
       title: postTitle,
       body: rawContent,
       savedAt: moment().valueOf()
     }
-    
+    saveDraft(uid, draft, postId)
+  }
 
-    props.saveDraft(props.uid, draft, postId)
+  const handlePublish = (e) => {
+    const contentState = postEditorState.getCurrentContent()
+    const rawContent = convertToRaw(contentState)
+    const post = {
+      title: postTitle,
+      body: rawContent,
+      createdAt: draftData ? draftData.createdAt : moment().valueOf(),
+      lastUpdatedAt: moment().valueOf()
+    }
+    publish(uid, post, postId)
   }
 
   return (
@@ -54,7 +63,9 @@ const EditPostPage = (props) => {
       Save draft
     </button>
 
-    <button className="postButton">
+    <button className="postButton"
+      onClick={handlePublish}
+    >
       Publish
     </button>
   </div>
@@ -82,6 +93,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   saveDraft: (uid, draft, postId) => {
     dispatch(saveDraft(uid, draft, postId))
+  },
+  publish: (uid, post, postId) => {
+    dispatch(publish(uid, post, postId))
   }
 })
 

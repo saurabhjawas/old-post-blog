@@ -12,12 +12,12 @@ import { setUserPosts } from '../actions/post'
 // ******************************
 // **** saga helpers
 // ******************************
-function* saveDraftAsync(action) {
-  // console.log(`******${action.uid}************`)
-  if (action.postId) {
-    yield database.ref(`${dbColl.POSTS}/${action.postId}`).update({
-      uid: action.uid,
-      draft: action.draft
+function* saveDraftAsync({ draft, uid, postId }) {
+  
+  if (postId) {
+    yield database.ref(`${dbColl.POSTS}/${postId}`).update({
+      uid,
+      draft
     }).then(() => {
       history.push({
         pathname: '/notification',
@@ -36,8 +36,8 @@ function* saveDraftAsync(action) {
 
   } else {
     yield database.ref(dbColl.POSTS).push({
-      uid: action.uid,
-      draft: action.draft
+      uid: uid,
+      draft: draft
     }).then(() => {
       history.push({
         pathname: '/notification',
@@ -80,6 +80,53 @@ function* fetchUserPostsAsync({ uid }) {
   yield put(setUserPosts(posts))  
 }
 
+function* publishAsync({ uid, post, postId }) {
+  
+  if (postId) {
+
+    yield database.ref(`${dbColl.POSTS}/${postId}`).update({
+      uid,
+      post
+    }).then(() => {
+      history.push({
+        pathname: '/notification',
+        state: {
+          displayMessage: 'Post Published successfully!'
+        }
+      })
+    }).catch((error) => {
+      history.push({
+        pathname: './notification',
+        state: {
+          displayMessage: `${error.code}: ${error.message}`
+        }
+      })
+    })
+
+  } else {
+
+    yield database.ref(dbColl.POSTS).push({
+      uid,
+      post
+    }).then(() => {
+      history.push({
+        pathname: '/notification',
+        state: {
+          displayMessage: 'Post Published successfully!'
+        }
+      })
+    }).catch((error) => {
+      history.push({
+        pathname: './notification',
+        state: {
+          displayMessage: `${error.code}: ${error.message}`
+        }
+      })
+    })
+
+  }
+}
+
 // ******************************
 // **** sagas
 // ******************************
@@ -91,5 +138,9 @@ function* watchStartSetUserPosts() {
   yield takeLatest(actionTypes.START_SET_USER_POSTS, fetchUserPostsAsync)
 }
 
+function* watchPublish() {
+  yield takeLatest(actionTypes.PUBLISH, publishAsync)
+}
 
-export { watchSaveDraft , watchStartSetUserPosts}
+
+export { watchSaveDraft , watchStartSetUserPosts, watchPublish }

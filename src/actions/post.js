@@ -16,3 +16,10 @@ export const setUserPosts = (posts) => ({
   type: actionTypes.SET_USER_POSTS,
   posts
 })
+
+export const publish = (uid, post, postId) => ({
+  type: actionTypes.PUBLISH,
+  uid,
+  post,
+  postId
+})
