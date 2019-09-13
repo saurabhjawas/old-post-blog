@@ -23,3 +23,17 @@ export const publish = (uid, post, postId) => ({
   post,
   postId
 })
+
+export const addPost = (post, postId, uid) => ({
+  type: actionTypes.ADD_POST,
+  post,
+  postId,
+  uid
+})
+
+export const addDraft = (draft, postId, uid) => ({
+  type: actionTypes.ADD_DRAFT,
+  draft,
+  postId,
+  uid
+})

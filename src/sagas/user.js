@@ -1,7 +1,5 @@
 import * as actionTypes from '../actions/actionTypes'
-import * as dbColl from '../firebase/dbCollections'
-
-import { database } from '../firebase/firebase'
+import * as dbApi from '../firebase/databaseApi'
 
 import { takeLatest } from 'redux-saga/effects'
 
@@ -11,13 +9,10 @@ import { takeLatest } from 'redux-saga/effects'
 
 function* saveUserAsync({ uid, displayName, photoURL, email, emailVerified }) {
 
-  yield database.ref(`${dbColl.USERS}/${uid}`).update({
-    displayName,
-    photoURL,
-    email,
-    emailVerified
-  })
+  yield dbApi.saveDataAsync({ displayName, photoURL, email, emailVerified }, dbApi.USERS, uid)
+
 }
+
 
 // ******************************
 // **** sagas

@@ -1,59 +1,38 @@
 import * as actionTypes from '../actions/actionTypes'
-import * as dbColl from '../firebase/dbCollections'
+import * as dbApi from '../firebase/databaseApi'
 
-import { takeLatest, put, call } from 'redux-saga/effects'
+import { takeLatest, put } from 'redux-saga/effects'
 
 import { database } from '../firebase/firebase'
 
 import { history } from '../routers/AppRouter'
 
-import { setUserPosts } from '../actions/post'
+import { setUserPosts, addPost, addDraft } from '../actions/post'
 
 // ******************************
 // **** saga helpers
 // ******************************
 function* saveDraftAsync({ draft, uid, postId }) {
-  
-  if (postId) {
-    yield database.ref(`${dbColl.POSTS}/${postId}`).update({
-      uid,
-      draft
-    }).then(() => {
-      history.push({
-        pathname: '/notification',
-        state: {
-          displayMessage: 'Draft Saved successfully!'
-        }
-      })
-    }).catch((error) => {
-      history.push({
-        pathname: './notification',
-        state: {
-          displayMessage: `${error.code}: ${error.message}`
-        }
-      })
-    })
 
+  const resultRef = yield dbApi.saveDataAsync({ draft, uid }, dbApi.POSTS, postId)
+
+  if (resultRef.key) {
+    
+    yield put(addDraft(draft, resultRef.key, uid))
+
+    history.push({
+      pathname: '/notification',
+      state: {
+        displayMessage: 'Draft Saved successfully!'
+      }
+    })
   } else {
-    yield database.ref(dbColl.POSTS).push({
-      uid: uid,
-      draft: draft
-    }).then(() => {
-      history.push({
-        pathname: '/notification',
-        state: {
-          displayMessage: 'Draft Saved successfully!'
-        }
-      })
-    }).catch((error) => {
-      history.push({
-        pathname: './notification',
-        state: {
-          displayMessage: `${error.code}: ${error.message}`
-        }
-      })
+    history.push({
+      pathname: './notification',
+      state: {
+        displayMessage: `${resultRef.code}: ${resultRef.message}`
+      }
     })
-
   }
 }
 
@@ -61,69 +40,49 @@ function* fetchUserPostsAsync({ uid }) {
 
   const fetchPostsSnapshot = (uid) => {
     return new Promise((resolve, reject) => {
-      database.ref(dbColl.POSTS)
-        .orderByChild(dbColl.UID)
+      database.ref(dbApi.POSTS)
+        .orderByChild(dbApi.UID)
         .equalTo(uid)
         .once('value', resolve)
     })
   }
 
-  const snapshot = yield call(fetchPostsSnapshot, uid)
+  const snapshot = yield fetchPostsSnapshot(uid) // alternative: yield call(fetchPostsSnapshot, uid)
 
   const posts = []
   if (snapshot.val()) {
     const resultSet = snapshot.val()    
     for (const key in resultSet) {
-      posts.push(resultSet[key])
+      const post = resultSet[key]
+      post.postId = key
+      posts.push(post)
     }   
   }
   yield put(setUserPosts(posts))  
 }
 
+
 function* publishAsync({ uid, post, postId }) {
   
-  if (postId) {
+  const resultRef = yield dbApi.saveDataAsync({ post, uid, draft: null }, dbApi.POSTS, postId)
 
-    yield database.ref(`${dbColl.POSTS}/${postId}`).update({
-      uid,
-      post
-    }).then(() => {
-      history.push({
-        pathname: '/notification',
-        state: {
-          displayMessage: 'Post Published successfully!'
-        }
-      })
-    }).catch((error) => {
-      history.push({
-        pathname: './notification',
-        state: {
-          displayMessage: `${error.code}: ${error.message}`
-        }
-      })
+  if (resultRef.key) {
+
+    yield put(addPost(post, resultRef.key, uid))
+
+    history.push({
+      pathname: '/notification',
+      state: {
+        displayMessage: 'Post Published successfully!'
+      }
     })
-
   } else {
-
-    yield database.ref(dbColl.POSTS).push({
-      uid,
-      post
-    }).then(() => {
-      history.push({
-        pathname: '/notification',
-        state: {
-          displayMessage: 'Post Published successfully!'
-        }
-      })
-    }).catch((error) => {
-      history.push({
-        pathname: './notification',
-        state: {
-          displayMessage: `${error.code}: ${error.message}`
-        }
-      })
+    history.push({
+      pathname: './notification',
+      state: {
+        displayMessage: `${resultRef.code}: ${resultRef.message}`
+      }
     })
-
   }
 }
 
