@@ -37,3 +37,13 @@ export const addDraft = (draft, postId, uid) => ({
   postId,
   uid
 })
+
+export const setCommonPosts = (posts) => ({
+  type: actionTypes.SET_COMMON_POSTS,
+  posts
+})
+
+
+export const startSetCommonPosts = () => ({
+  type: actionTypes.START_SET_COMMON_POSTS
+})

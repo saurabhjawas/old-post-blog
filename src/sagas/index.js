@@ -20,7 +20,8 @@ function* rootSaga() {
     // post sagas
     postSagas.watchSaveDraft(),
     postSagas.watchStartSetUserPosts(),
-    postSagas.watchPublish()
+    postSagas.watchPublish(),
+   postSagas.watchStartSetCommonPosts()
   ])
 }
 

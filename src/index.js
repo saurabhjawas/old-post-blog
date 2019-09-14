@@ -10,7 +10,7 @@ import { firebase } from './firebase/firebase'
 
 //actions
 import { login, logout, verifyEmail } from './actions/auth'
-import { startSetUserPosts, setUserPosts } from './actions/post'
+import { startSetUserPosts, setUserPosts, startSetCommonPosts } from './actions/post'
 
 // STYLES
 import 'normalize.css/normalize.css';
@@ -43,6 +43,8 @@ const renderApp = () => {
     hasRendered = true
   }
 }
+
+store.dispatch(startSetCommonPosts())
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {

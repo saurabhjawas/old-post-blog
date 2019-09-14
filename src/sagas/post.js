@@ -7,7 +7,7 @@ import { database } from '../firebase/firebase'
 
 import { history } from '../routers/AppRouter'
 
-import { setUserPosts, addPost, addDraft } from '../actions/post'
+import { setUserPosts, addPost, addDraft, setCommonPosts } from '../actions/post'
 
 // ******************************
 // **** saga helpers
@@ -77,6 +77,31 @@ function* publishAsync({ uid, post, postId }) {
   }
 }
 
+function* startSetCommonPostsAsync() {
+  const snapshot = yield dbApi.fetchDataSnapshotAsync(dbApi.POSTS, 20)
+
+  const commonPosts = []
+
+  if (snapshot.val()) {
+    const resultSet = snapshot.val()
+    for (const key in resultSet) {
+      const postObj = resultSet[key]
+
+      if (postObj.post) {
+        
+        commonPosts.push({
+          uid: postObj.uid,
+          postId: key,
+          post: postObj.post
+        })
+      }
+
+    }
+  }
+
+  yield put(setCommonPosts(commonPosts))
+}
+
 // ******************************
 // **** sagas
 // ******************************
@@ -92,5 +117,8 @@ function* watchPublish() {
   yield takeLatest(actionTypes.PUBLISH, publishAsync)
 }
 
+function* watchStartSetCommonPosts() {
+  yield takeLatest(actionTypes.START_SET_COMMON_POSTS, startSetCommonPostsAsync)
+}
 
-export { watchSaveDraft , watchStartSetUserPosts, watchPublish }
+export { watchSaveDraft , watchStartSetUserPosts, watchPublish, watchStartSetCommonPosts }

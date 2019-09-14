@@ -26,14 +26,14 @@ export const fetchDataSnapshotAsync = (collectionName, itemCount , uid) => {
       database.ref(collectionName)
         .orderByChild(UID)
         .equalTo(uid)
-        .limitToLast(itemCount)
+        .limitToLast(itemCount ? itemCount : 20)
         .once('value', resolve, reject)
     })
   } else {
     return new Promise((resolve, reject) => {
       database.ref(collectionName)
         .orderByKey()
-        .limitToLast(itemCount)
+        .limitToLast(itemCount ? itemCount : 20)
         .once('value', resolve, reject)
     })
   }

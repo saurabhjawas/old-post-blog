@@ -4,6 +4,7 @@ import createSagaMiddleware from 'redux-saga'
 // reducers
 import authReducer from '../reducers/auth'
 import postReducer from '../reducers/post'
+import commonPostsReducer from '../reducers/commonPosts'
 
 // saga
 import rootSaga from '../sagas'
@@ -17,7 +18,8 @@ const configureStore = () => {
   const store = createStore(
     combineReducers({
       auth: authReducer,
-      userPosts: postReducer
+      userPosts: postReducer,
+      commonPosts: commonPostsReducer
     }) , composeEnhancers(applyMiddleware(sagaMiddleware))
   )
   
