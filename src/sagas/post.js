@@ -38,17 +38,8 @@ function* saveDraftAsync({ draft, uid, postId }) {
 
 function* fetchUserPostsAsync({ uid }) {
 
-  const fetchPostsSnapshot = (uid) => {
-    return new Promise((resolve, reject) => {
-      database.ref(dbApi.POSTS)
-        .orderByChild(dbApi.UID)
-        .equalTo(uid)
-        .once('value', resolve)
-    })
-  }
-
-  const snapshot = yield fetchPostsSnapshot(uid) // alternative: yield call(fetchPostsSnapshot, uid)
-
+  const snapshot = yield dbApi.fetchDataSnapshotAsync(dbApi.POSTS, 20 , uid)
+  
   const posts = []
   if (snapshot.val()) {
     const resultSet = snapshot.val()    

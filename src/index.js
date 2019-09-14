@@ -47,23 +47,20 @@ const renderApp = () => {
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
 
-    // console.log(user)
     if (user.emailVerified) {
 
-      // console.log('email is VERIFIED!!!')
       store.dispatch(login(user))
-      // history.push('/dashboard')
-
       store.dispatch(startSetUserPosts(user.uid))
+
     } else {
-      console.log('email is NOT VERIFIED!!!')
+      // console.log('email is NOT VERIFIED!!!')
       store.dispatch(verifyEmail(user))
     }   
     
   } else {
     store.dispatch(setUserPosts([]))
     store.dispatch(logout())
-    // history.push('/login')
+    
   }
   renderApp()
 })

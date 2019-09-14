@@ -17,3 +17,25 @@ export const saveDataAsync = (dataObject, collectionName, collectionId) => {
     )
   } 
 }
+
+
+export const fetchDataSnapshotAsync = (collectionName, itemCount , uid) => {
+
+  if (uid) {
+    return new Promise((resolve, reject) => {
+      database.ref(collectionName)
+        .orderByChild(UID)
+        .equalTo(uid)
+        .limitToLast(itemCount)
+        .once('value', resolve, reject)
+    })
+  } else {
+    return new Promise((resolve, reject) => {
+      database.ref(collectionName)
+        .orderByKey()
+        .limitToLast(itemCount)
+        .once('value', resolve, reject)
+    })
+  }
+
+}
