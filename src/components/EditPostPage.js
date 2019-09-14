@@ -17,7 +17,7 @@ const EditPostPage = ({ draftData, uid, saveDraft, publish }) => {
   const initialTitle =  draftData ? draftData.title : ''
 
   const initialEditorState = draftData ? (
-    EditorState.createWithContent(convertFromRaw(draftData.body))
+    EditorState.createWithContent(convertFromRaw(JSON.parse(draftData.body)))
   ) : (
     createEditorStateWithText('')
   )
@@ -35,7 +35,7 @@ const EditPostPage = ({ draftData, uid, saveDraft, publish }) => {
     const rawContent = convertToRaw(contentState)
     const draft = {
       title: postTitle,
-      body: rawContent,
+      body: JSON.stringify(rawContent),
       savedAt: moment().valueOf()
     }
     saveDraft(uid, draft, postId)
@@ -46,7 +46,7 @@ const EditPostPage = ({ draftData, uid, saveDraft, publish }) => {
     const rawContent = convertToRaw(contentState)
     const post = {
       title: postTitle,
-      body: rawContent,
+      body: JSON.stringify(rawContent),
       createdAt: draftData ? draftData.createdAt : moment().valueOf(),
       lastUpdatedAt: moment().valueOf()
     }
@@ -81,6 +81,7 @@ const EditPostPage = ({ draftData, uid, saveDraft, publish }) => {
       <PostEditor
         postEditorState={postEditorState}
         setPostEditorState={setPostEditorState}
+        readOnly={false}
       />
     </div>
   )

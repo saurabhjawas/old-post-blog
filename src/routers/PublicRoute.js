@@ -16,7 +16,7 @@ const PublicRoute = ({
     if (isRestricted && isAuthenticated) {
 
       return (
-        <Redirect to="/dashboard" />
+        <Redirect to="/latestposts" />
       )
 
     } else {

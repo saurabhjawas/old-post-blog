@@ -3,7 +3,7 @@ import * as dbApi from '../firebase/databaseApi'
 
 import { takeLatest, put } from 'redux-saga/effects'
 
-import { database } from '../firebase/firebase'
+// import { database } from '../firebase/firebase'
 
 import { history } from '../routers/AppRouter'
 

@@ -13,10 +13,10 @@ const Header = ({ isAuthenticated, logoutOfProfile }) => (
 
         <NavLink
           className="navlink"
-          to="/dashboard"
+          to="/latestposts"
           activeClassName="active-navlink"
         >
-          Dashboard
+          Recent Posts
         </NavLink>
 
         {
