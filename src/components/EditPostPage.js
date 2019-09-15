@@ -59,7 +59,7 @@ const EditPostPage = ({ draftObj, uid, saveDraft, publish }) => {
   useEffect(() => {
     setPostEditorState(initialEditorState)
     setPostTitle(initialTitle)
-  }, draftObj)
+  }, [draftObj])
 
   return (
     <div className="container postWrapper">
@@ -97,7 +97,7 @@ const EditPostPage = ({ draftObj, uid, saveDraft, publish }) => {
 
 const mapStateToProps = (state, props) => ({
   uid: state.auth.uid,
-  draftObj: getWorkObject( getDrafts(state.userPosts), props.match.params.postId )
+  draftObj: getWorkObject(getDrafts(state.userPosts), props.match.params.postId )
 })
 
 const mapDispatchToProps = (dispatch) => ({
