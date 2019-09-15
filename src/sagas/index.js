@@ -21,7 +21,7 @@ function* rootSaga() {
     postSagas.watchSaveDraft(),
     postSagas.watchStartSetUserPosts(),
     postSagas.watchPublish(),
-   postSagas.watchStartSetCommonPosts()
+    postSagas.watchStartSetCommonPosts()
   ])
 }
 

@@ -35,6 +35,7 @@ const AppRouter = () => (
       <PrivateRoute path="/profile" component={ProfilePage} />
       <PrivateRoute path="/mywork" component={MyWorkPage} />
       <PrivateRoute path="/newPost" component={EditPostPage} />
+      <PrivateRoute path="/edit/:postId" component={EditPostPage} />
 
       <PublicRoute isRestricted={false} component={NotFoundPage} />
 

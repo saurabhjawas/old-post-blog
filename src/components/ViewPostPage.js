@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { EditorState , convertFromRaw } from 'draft-js'
 import  { createEditorStateWithText } from 'draft-js-plugins-editor';
 
-import { getPostObject } from '../selectors/post'
+import { getWorkObject } from '../selectors/post'
 import moment from 'moment'
 
 import PostEditor from './PostEditor'
@@ -34,7 +34,7 @@ const ViewPostPage = ({ postObj }) => {
 }
 
 const mapStateToProps = (state, props) => ({  
-    postObj: getPostObject(state.commonPosts, props.match.params.postId)
+    postObj: getWorkObject(state.commonPosts, props.match.params.postId)
 })
 
 export default connect(mapStateToProps, undefined)(ViewPostPage)

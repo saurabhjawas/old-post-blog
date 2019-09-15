@@ -9,6 +9,11 @@ export const saveDataAsync = (dataObject, collectionName, collectionId) => {
     return (
       database.ref(`${collectionName}/${collectionId}`)
         .update({ ...dataObject })
+        .then(() => (
+          new Promise((resolve) => {
+            resolve({key: collectionId})
+          })
+        ))
     )
   } else {
     return (

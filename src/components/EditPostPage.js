@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { EditorState, convertToRaw , convertFromRaw } from 'draft-js'
@@ -7,22 +7,25 @@ import  { createEditorStateWithText } from 'draft-js-plugins-editor';
 import moment from 'moment'
 
 import { saveDraft, publish } from '../actions/post'
+import { getWorkObject, getDrafts} from '../selectors/post'
 
 import PostEditor from './PostEditor'
 
-const EditPostPage = ({ draftData, uid, saveDraft, publish }) => {
+const EditPostPage = ({ draftObj, uid, saveDraft, publish }) => {
 
-  const postId = draftData ? draftData.postId : undefined
+  const postId = draftObj ? draftObj.postId : undefined
 
-  const initialTitle =  draftData ? draftData.title : ''
+  const initialTitle =  draftObj ? draftObj.draft.title : ''
 
-  const initialEditorState = draftData ? (
-    EditorState.createWithContent(convertFromRaw(JSON.parse(draftData.body)))
+  const initialEditorState = draftObj ? (
+    EditorState.createWithContent(convertFromRaw(JSON.parse(draftObj.draft.body)))
   ) : (
     createEditorStateWithText('')
   )
   
   const [ postTitle, setPostTitle] = useState(initialTitle)
+  
+  // console.log(`*****${postId}*****`)
 
   const [postEditorState, setPostEditorState ] = useState(initialEditorState)
 
@@ -38,7 +41,7 @@ const EditPostPage = ({ draftData, uid, saveDraft, publish }) => {
       body: JSON.stringify(rawContent),
       savedAt: moment().valueOf()
     }
-    saveDraft(uid, draft, postId)
+    saveDraft( uid, draft, postId)
   }
 
   const handlePublish = (e) => {
@@ -47,48 +50,54 @@ const EditPostPage = ({ draftData, uid, saveDraft, publish }) => {
     const post = {
       title: postTitle,
       body: JSON.stringify(rawContent),
-      createdAt: draftData ? draftData.createdAt : moment().valueOf(),
+      createdAt: draftObj ? draftObj.createdAt : moment().valueOf(),
       lastUpdatedAt: moment().valueOf()
     }
     publish(uid, post, postId)
   }
 
+  useEffect(() => {
+    setPostEditorState(initialEditorState)
+    setPostTitle(initialTitle)
+  }, draftObj)
+
   return (
     <div className="container postWrapper">
 
-    <div className="postButtonWrapper">
-    <button className="postButton"
-      onClick={handleSaveDraft}
-    >
-      Save draft
-    </button>
+      <div className="postButtonWrapper">
+        <button className="postButton"
+          onClick={handleSaveDraft}
+        >
+          Save draft
+        </button>
 
-    <button className="postButton"
-      onClick={handlePublish}
-    >
-      Publish
-    </button>
-  </div>
+        <button className="postButton"
+          onClick={handlePublish}
+        >
+          Publish
+        </button>
+      </div>
 
-    <input className="postTitleInput" 
-      type="text"
-      value={postTitle}
-      onChange={handlePostTitleChange}
-      placeholder="post title here.."
-    />
+      <input className="postTitleInput" 
+        type="text"
+        value={postTitle}
+        onChange={handlePostTitleChange}
+        placeholder="post title here.."
+      />
 
-      {/* <h2>This is NewPostPage</h2> */}
       <PostEditor
         postEditorState={postEditorState}
         setPostEditorState={setPostEditorState}
         readOnly={false}
       />
+
     </div>
   )
 }
 
-const mapStateToProps = (state) => ({
-  uid:  state.auth.uid
+const mapStateToProps = (state, props) => ({
+  uid: state.auth.uid,
+  draftObj: getWorkObject( getDrafts(state.userPosts), props.match.params.postId )
 })
 
 const mapDispatchToProps = (dispatch) => ({

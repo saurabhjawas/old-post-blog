@@ -1,12 +1,21 @@
-export const getPostObject = (posts, postId) => {
+export const getWorkObject = (workList, postId) => {
 
-  const idx = posts.findIndex(postObj => {      
-    return postObj.postId === postId
-  })
+  const idx = workList.findIndex(workObj => workObj.postId === postId )
 
   if (idx >= 0) {
-    return posts[idx]
+    
+    return workList[idx]
   } else {
     return null
   }
 }
+
+export const getDrafts = (posts) => (
+  posts
+    .filter(postObj => postObj.draft ? true : false )
+    .map(postObj => ({
+        draft: postObj.draft,
+        uid: postObj.uid,
+        postId: postObj.postId
+    }))  
+)
