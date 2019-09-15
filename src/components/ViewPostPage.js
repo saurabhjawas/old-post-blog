@@ -11,7 +11,7 @@ import PostEditor from './PostEditor'
 
 const ViewPostPage = ({ postObj }) => {
 
-  console.log(postObj)
+  //console.log(postObj)
   const postTitle =  postObj ? postObj.post.title : ''
 
   const initialEditorState = postObj ? (
@@ -21,13 +21,8 @@ const ViewPostPage = ({ postObj }) => {
   )
 
   return (
-    <div className="container postWraper">
-
-      <input className="postTitleInput" 
-        type="text"
-        readOnly
-        defaultValue={postTitle}   
-      />
+    <div className="container postWrapper">
+      <div className="postTitleView">{postTitle}</div>
 
       <PostEditor
         postEditorState={initialEditorState}

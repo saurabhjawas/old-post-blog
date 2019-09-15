@@ -54,7 +54,7 @@ const EditPostPage = ({ draftData, uid, saveDraft, publish }) => {
   }
 
   return (
-    <div className="container postWraper">
+    <div className="container postWrapper">
 
     <div className="postButtonWrapper">
     <button className="postButton"

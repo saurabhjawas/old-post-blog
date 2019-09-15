@@ -37,7 +37,9 @@ class PostEditor extends Component {
   render() {
     return (
 
-      <div className="postEditor" onClick={this.focus}>
+      <div 
+      className={this.props.readOnly ? "postEditor viewPostEditor" : "postEditor"} onClick={this.focus}
+      >
         <Editor readOnly={this.props.readOnly}
           editorState={this.props.postEditorState}
           onChange={this.handleEditorChange}

@@ -16,7 +16,7 @@ const Header = ({ isAuthenticated, logoutOfProfile }) => (
           to="/latestposts"
           activeClassName="active-navlink"
         >
-          Recent Posts
+          Recent
         </NavLink>
 
         {

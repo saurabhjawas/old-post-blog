@@ -1,7 +1,3 @@
-.postWraper {
-  padding: 0 8rem;
-}
-
 .postEditor {
   box-sizing: border-box;
   border: 1px solid #ddd;
@@ -21,15 +17,7 @@
   margin-top: .3rem;
 }
 
-.postTitleInput {
-  height: 5rem;
-  width: 100%;
-  margin-bottom: 1rem;
-  text-align: center;
-  outline: none;
-  box-sizing: border-box;
-  border: 1px solid #ddd;
-  box-shadow: inset 0px 1px 8px -3px #ABABAB;
-  margin-top: 1rem;
+.viewPostEditor {
+  border: none;
+  box-shadow: none;
 }
-
