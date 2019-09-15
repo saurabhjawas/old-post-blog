@@ -10,6 +10,9 @@ import moment from 'moment'
 import PostEditor from './PostEditor'
 
 const ViewPostPage = ({ postObj }) => {
+  
+  const firstPublishOn = postObj ? moment(postObj.post.createdAt).format('MMMM Do YYYY, h:mm:ss a') : ''
+  const lastUpdatedOn = postObj ? moment(postObj.lastUpdatedAt).format('MMMM Do YYYY, h:mm:ss a') : ''
 
   //console.log(postObj)
   const postTitle =  postObj ? postObj.post.title : ''
@@ -20,8 +23,12 @@ const ViewPostPage = ({ postObj }) => {
     createEditorStateWithText('')
   )
 
+  
   return (
     <div className="container postWrapper">
+
+      <h5>First published: {firstPublishOn}</h5>
+      <h5>Last update: {lastUpdatedOn}</h5>
       <div className="postTitleView">{postTitle}</div>
 
       <PostEditor
