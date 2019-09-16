@@ -39,3 +39,8 @@ export const getPosts = (posts) => (
       postId: postObj.postId
     }))  
 )
+
+export const gerPostObj = (posts, postId) => {
+  const idx = posts.findIndex(postObj => postObj.postId === postId)
+  return idx >= 0 ? posts[idx] : null
+}
