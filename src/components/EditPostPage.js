@@ -7,7 +7,7 @@ import  { createEditorStateWithText } from 'draft-js-plugins-editor';
 import moment from 'moment'
 
 import { saveDraft, publish } from '../actions/post'
-import { getWorkObject, getDrafts} from '../selectors/post'
+import { getWorkObject } from '../selectors/post'
 
 import PostEditor from './PostEditor'
 
@@ -97,7 +97,7 @@ const EditPostPage = ({ draftObj, uid, saveDraft, publish }) => {
 
 const mapStateToProps = (state, props) => ({
   uid: state.auth.uid,
-  draftObj: getWorkObject(getDrafts(state.userPosts), props.match.params.postId )
+  draftObj: getWorkObject(state.userPosts, props.match.params.postId )
 })
 
 const mapDispatchToProps = (dispatch) => ({
